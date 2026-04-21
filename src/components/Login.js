@@ -1,6 +1,11 @@
 import React, { useState, useRef } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -16,9 +21,9 @@ const Login = () => {
 
   const handleButtonClick = () => {
     //Validate the form data
-    const emailVal = email.current?.value || '';
-    const passwordVal = password.current?.value || '';
-    const fullNameVal = fullName.current?.value || '';
+    const emailVal = email.current?.value || "";
+    const passwordVal = password.current?.value || "";
+    const fullNameVal = fullName.current?.value || "";
 
     console.log(emailVal);
     console.log(passwordVal);
@@ -27,6 +32,42 @@ const Login = () => {
     const message = checkValidData(emailVal, passwordVal, fullNameVal);
 
     setErrorMessage(message);
+
+    if (message) {
+      return;
+    }
+
+    if (!isSignInForm) {
+      //Signup logic
+      createUserWithEmailAndPassword(auth, emailVal, passwordVal)
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          console.log(user);
+
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + ": " + errorMessage);
+        });
+    } else {
+      //signin logic
+      signInWithEmailAndPassword(auth, emailVal, passwordVal)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+          
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + ": " + errorMessage);
+        });
+    }
 
     //Sign / SignUp
   };
@@ -42,7 +83,10 @@ const Login = () => {
         />
       </div>
 
-      <form onSubmit={(e) => e.preventDefault()} className="w-3/12 absolute p-12 bg-black my-36 mx-auto left-0 right-0 rounded-lg text-white bg-opacity-80">
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className="w-3/12 absolute p-12 bg-black my-36 mx-auto left-0 right-0 rounded-lg text-white bg-opacity-80"
+      >
         <h1 className="text-3xl font-bold mb-6 py-4 ">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
