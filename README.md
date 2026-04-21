@@ -13,6 +13,9 @@
 - Create Signup User account
 - Implement SIgn In UserAPI
 - Created Redux Store with userSlice
+- Implemented Sign out
+- Update Profile
+- Fetch Movies from tmdb api
 
 # Features
 - Login/Sign Up
