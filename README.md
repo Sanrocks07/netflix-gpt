@@ -16,6 +16,9 @@
 - Implemented Sign out
 - Update Profile
 - Fetch Movies from tmdb api
+- BUgfix: SIgnup user displayName and profile picture update
+- BugFix: if the user is not logged in Redirect/browser to Login Page and vice-versa
+- 
 
 # Features
 - Login/Sign Up
