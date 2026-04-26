@@ -2,6 +2,8 @@ export const LOGO = "https://images.ctfassets.net/y2ske730sjqp/1aONibCke6niZhgPx
 
 export const PHOTO_URL = "https://example.com/jane-q-user/profile.jpg";
 
+export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
+
 const TMDB_API_TOKEN = process.env.REACT_APP_TMDB_API_TOKEN;
 
 if (!TMDB_API_TOKEN) {
