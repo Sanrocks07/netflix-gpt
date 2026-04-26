@@ -4,11 +4,12 @@ import { checkValidData } from "../utils/validate";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BACKGROUND_IMAGE, PHOTO_URL } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -29,10 +30,6 @@ const Login = () => {
     const passwordVal = password.current?.value || "";
     const fullNameVal = fullName.current?.value || "";
 
-    console.log(emailVal);
-    console.log(passwordVal);
-    console.log(fullNameVal);
-
     const message = checkValidData(emailVal, passwordVal, fullNameVal);
 
     setErrorMessage(message);
@@ -49,19 +46,24 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: fullNameVal,
-            photoURL: "https://example.com/jane-q-user/profile.jpg",
+            photoURL: PHOTO_URL,
           })
             .then(() => {
               // Profile updated!
               const { uid, email, displayName, photoURL } = auth.currentUser;
-              dispatch(addUser({ uid: user.uid, email: user.email, displayName: fullNameVal }));
+              dispatch(
+                addUser({
+                  uid: user.uid,
+                  email: user.email,
+                  displayName: fullNameVal,
+                }),
+              );
             })
             .catch((error) => {
               // An error occurred
               // ...
               setErrorMessage(error.message);
             });
-          
 
           // ...
         })
@@ -92,11 +94,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://xboxwire.thesourcemediaassets.com/sites/2/2023/05/Background-size1920x1080-4e1694a6-75aa-4c36-9d4d-7fb6a3102005-bc5318781aad7f5c8520.png"
-          alt="Netflix Login"
-          className="w-full"
-        />
+        <img src={BACKGROUND_IMAGE} alt="Netflix Login" className="w-full" />
       </div>
 
       <form

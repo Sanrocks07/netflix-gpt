@@ -18,7 +18,17 @@
 - Fetch Movies from tmdb api
 - BUgfix: SIgnup user displayName and profile picture update
 - BugFix: if the user is not logged in Redirect/browser to Login Page and vice-versa
-- 
+- Unsubscribed to the onAuthStateCHanged callback
+- Add hardcoded values to constant files
+- Register for TMDBAPI API & get access token
+- Get Data from TMDB
+- CUstom Hook for nowPlayingMovies
+- Create movieSlice
+- Update store with movies data
+- Planning for MainCOntainer & secondary container
+- Update store with Trailer VIdeo Details
+- EMbedd youtube video
+- Tailwind classes to make MainContainer look awesome
 
 # Features
 - Login/Sign Up
