@@ -29,6 +29,13 @@
 - Update store with Trailer VIdeo Details
 - EMbedd youtube video
 - Tailwind classes to make MainContainer look awesome
+- Build Secondary component
+- Build Movie List
+- Build Movie Card
+- TMDB Image CDN URL
+- Made the Browser page amazing with TailwindCSS
+- usePopularMovies Custom Hook
+- GPT Search feature
 
 # Features
 - Login/Sign Up
